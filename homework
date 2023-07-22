@@ -1,0 +1,42 @@
+from matplotlib import pyplot as plt
+import numpy as np
+import tensorcircuit as tc
+s_x=np.array([[0,1],[1,0]])
+s_y=np.array([[0,0+1j],[0-1j,0]])
+s_z=np.array([[1,0],[0,-1]])
+def con_dot(x):
+    a=np.array([[1,0],[0,1]])
+    for i in range(len(x)):
+        a=np.dot(a,x[i])
+    return a
+def multiple(x):
+    a=1
+    for i in range(1,x+1):
+        a=a*i
+    return a
+def exp(x):
+    sum=np.array([[0,0],[0,0]])
+    for i in range(0,100):
+        y=[x]*i
+        sum = sum + (con_dot(y)/multiple(i))
+    return sum
+#2.1 visualize the rotation
+from matplotlib import pyplot as plt
+import numpy as np
+theta = np.pi/4
+R = np.array([[np.cos(theta),np.sin(theta)],[-np.sin(theta),np.cos(theta)]])
+A1 = np.array([1,0]).T
+A2 = np.dot(R,A1)
+x1 = np.linspace(0,A1[0],100)
+y1 = np.linspace(0,A1[1],100)
+x2 = np.linspace(0,A2[0],100)
+y2 = np.linspace(0,A2[1],100)
+plt.figure(figsize=(8,6),dpi=80)
+plt.plot(x1,y1,color="blue",linewidth=3)
+plt.plot(x2,y2,color="green",linewidth=3)
+plt.show()
+#2.2 prove the formula
+for i in range(3):
+    theta = 1
+    print(exp(1j * theta * s_tuple[i]) - np.cos(theta) * np.array([[1, 0], [0, 1]]) - np.sin(theta) * s_tuple[i])
+satisfied condition:P*P=I,which Pauli matrixs satisfy
