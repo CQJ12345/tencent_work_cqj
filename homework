@@ -40,3 +40,36 @@ for i in range(3):
     theta = 1
     print(exp(1j * theta * s_tuple[i]) - np.cos(theta) * np.array([[1, 0], [0, 1]]) - np.sin(theta) * s_tuple[i])
 satisfied condition:P*P=I,which Pauli matrixs satisfy
+#2-3 expect of matrix
+def expect(x,y,theta):
+    H = exp(1j*theta*s_tuple[x]/2)
+    v_theta_1 = np.dot(H,np.array([1,0]).T)
+    v_theta_2 = np.conjugate(v_theta_1).T
+    result = con_dot([v_theta_2,s_tuple[y],v_theta_1])
+    return result
+plt.figure(figsize=(8,6),dpi=80)
+x1 = np.linspace(0,2*np.pi,100)
+y1 = []
+for i in range(100):
+    y1.append(expect(0,2,x1[i]))
+plt.plot(x1,y1,linewidth=3,color="blue",label="(0,2)(1,2)")
+#*************************************
+x2 = np.linspace(0,2*np.pi,100)
+y2 = []
+for i in range(100):
+    y2.append(expect(1,0,x2[i]))
+plt.plot(x2,y2,linewidth=3,color="green",label="(0,1)(1,0)")
+#**************************************
+x3 = np.linspace(0,2*np.pi,100)
+y3 = []
+for i in range(100):
+    y3.append(expect(2,2,x3[i]))
+plt.plot(x3,y3,linewidth=3,color="red",label="(2,2)")
+#*****************************************************
+x4 = np.linspace(0,2*np.pi,100)
+y4 = []
+for i in range(100):
+    y4.append(expect(2,0,x4[i]))
+plt.plot(x4,y4,linewidth=3,color="orange",label="(0,2)(1,2)")
+plt.xticks([0,np.pi/2,np.pi,3*np.pi/2,2*np.pi],[r"$o$",r"$\pi/2$",r"$\pi$",r"$3\pi/2$",r"$2\pi$"])
+plt.show()
