@@ -94,3 +94,10 @@ l=np.array([0]*(2**n))
 l[0]=1
 print(con_dot([l,H,l.T]))
 #The expect is equal to n
+#2_5 Dirac vector
+v0=np.array([1,0]).T
+v1=np.array([0,1]).T
+a1 = con_mu([v0,v1,v0])
+a2 = con_mu([v1,v0,v1])
+answer = (2**(-1/2))*(a1-a2)
+print(answer)
