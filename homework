@@ -101,3 +101,17 @@ a1 = con_mu([v0,v1,v0])
 a2 = con_mu([v1,v0,v1])
 answer = (2**(-1/2))*(a1-a2)
 print(answer)
+#3-3
+def expect3_3(x,y,theta):
+    P1 = s_tuple[x]
+    P2 = s_tuple[y]
+    matrix1=exp(-P1,theta/2)
+    matrix2=exp(P1,theta/2)
+    return con_dot([np.array([1,0]),matrix1,P2,matrix2,np.array([1,0]).T])
+theta = np.linspace(0,4*np.pi,100)
+f=[]
+for i in range(100):
+    f.append(expect3_3(0,1,theta[i]))
+plt.figure(figsize=(8,6),dpi=80)
+plt.plot(theta,f,color="blue",linewidth=3)
+plt.show()
