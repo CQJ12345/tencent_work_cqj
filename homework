@@ -115,3 +115,17 @@ for i in range(100):
 plt.figure(figsize=(8,6),dpi=80)
 plt.plot(theta,f,color="blue",linewidth=3)
 plt.show()
+#4.1
+def expection(a1,a2):
+    c = tc.Circuit(2)
+    c.h(0)
+    c.cnot(0,1)
+    c.conditional_gate(a1,[tc.gates.i(),tc.gates.z()],0)
+    c.conditional_gate(a2, [tc.gates.i(), tc.gates.z()], 1)
+    c.cnot(0,1)
+    c.h(0)
+    return c.measure(0)[0],c.measure(1)[0]
+print(expection(1,1))
+
+
+
